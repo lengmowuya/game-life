@@ -1,0 +1,18 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+#root {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#AppCenter {
+  width: 481px;
+  height: 926px;
+  box-shadow: 0px 0px 6px #ccc;
+  /* background: url('../public/assets/主界面.jpg') center center no-repeat; */
+  background-size: 100% 100%;
+  display: flex;
+}
