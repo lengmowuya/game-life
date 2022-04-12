@@ -1,0 +1,116 @@
+#ReadyPage {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.Role {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.Role h1 {
+  margin-top: 80px;
+  user-select: none;
+  text-shadow: 5px 5px 0px #eee;
+}
+.Role .roleName {
+  width: 266px;
+  height: 42px;
+  margin-top: 26px;
+  text-align: center;
+  box-sizing: border-box;
+  font-size: 20px;
+  font-weight: bold;
+  border: 1px solid #C8C8C8;
+  background-color: #EFEFEF;
+}
+.Role .roleSex {
+  margin-top: 16px;
+  display: flex;
+  justify-content: space-between;
+  width: 266px;
+}
+.Role .roleSex > button {
+  width: 110px;
+  height: 42px;
+  border: none;
+  font-size: 20px;
+}
+.Role .roleSex > button.active {
+  background: #C4C4C4;
+}
+.Talent {
+  width: 348px;
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border: 1px solid #ccc;
+  background: #f6f6f6;
+  padding: 15px;
+  box-sizing: border-box;
+}
+.Talent .talentTitle {
+  color: #aaa;
+  line-height: 23px;
+  font-size: 20px;
+}
+.Talent .talentLi {
+  width: 315px;
+  height: 40px;
+  background: #B2B2B2;
+  color: #4B4B4B;
+  font-weight: bold;
+  line-height: 40px;
+  margin-top: 16px;
+}
+.Talent .talentLi .talentName {
+  margin-left: 12px;
+}
+.Talent .talentLi.gold {
+  background: #FFC001;
+  color: #AD6E00;
+}
+.Talent .talentLi.green {
+  background: #00DA37;
+  color: #007607;
+}
+.Talent .talentLi.blue {
+  background: #66D0FE;
+  color: #0069BE;
+}
+.Talent .refresh {
+  width: 122px;
+  height: 40px;
+  margin-top: 16px;
+  background: #E8E8E8;
+  border: none;
+}
+.startLife {
+  width: 200px;
+  height: 60px;
+  margin-top: 40px;
+  border: 2px solid #333;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 24px;
+  background: #fff;
+  box-shadow: 3px 3px 6px #ccc;
+  transition: all 0.25s;
+  cursor: pointer;
+  display: flex;
+}
+.startLife:hover {
+  background: #eee;
+  box-shadow: 3px 3px 16px #ccc;
+}
+.startLife a {
+  display: inline-block;
+  min-height: 60px;
+  line-height: 60px;
+  flex-grow: 1;
+  text-align: center;
+  text-decoration: none;
+  color: #000;
+}

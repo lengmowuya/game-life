@@ -7,7 +7,7 @@ export default class Home extends Component {
       <div id="HomePage">
           {/* home */}
           <button className='startGame'>
-            <NavLink to="/life">开始人生！</NavLink>
+            <NavLink to="/ready">开始人生！</NavLink>
           </button>
       </div>
     )
