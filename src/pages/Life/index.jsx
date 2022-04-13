@@ -1,13 +1,23 @@
 import React, { Component } from 'react'
 import classNames from 'classnames'
+import cityLibrary from './../../library/area/city.json'
+import distance from './../../library/area/distance.json'
+import rural from './../../library/area/rural.json'
 import './index.css'
 
 export default class Life extends Component {
     lifeStoryList = React.createRef();
     state = {
         role:{
-            age:3
+            age:0,
+            sex:'男',
+            area:'农村',
+            name:'张建安',
         },
+        famaily:[
+            {identity:"父亲",industry:"赤脚医生"},
+            {identity:"母亲",industry:"农妇"}
+        ],
         attributes:[
             {name:'精神',count:6,level:2},
             {name:'颜值',count:2,level:1},
@@ -18,16 +28,39 @@ export default class Life extends Component {
         ],
         levelColors:['black','green','blue','purple','red'],
         lifeStorys:[
-            {text:'你顺利出生了，是个女娃，你被取名【张梦菲】',class:'green'},
-            {text:'1岁：你从小生活在城市'},
-            {text:'2岁：你的父母对你爱护有加'}
         ],
         entryLibrary:[
             '你总是遭遇校园霸凌',
             '你换了好几颗牙',
+            '你生了场重病，家里花了不少钱',
             '到同学家借书看',
-            '上山偷橘子差点被主人发现'
-        ]
+            '上山偷橘子差点被主人发现',
+            '你追得家里的动物鸡飞狗跳',
+            '你偷了父母的零钱去买零食',
+            '今年股市大崩，股民损失惨重',
+            '顺利的一年，没发生什么大事',
+            '你的身体越来越差了',
+            '你对人生有些迷茫，还有些懵懂',
+            '你小病不断',
+            '你发觉生活越来越无趣'
+        ],
+        entryList:[]
+    }
+    randomRole = ()=>{
+        const {role} = this.state
+        if(Math.random()<=0.5){
+            role.sex="女"
+            role.name="刘菲"
+        }
+        const randomArea = Math.random();
+        if(randomArea <= 0.15){
+            role.area = '偏远地区'
+        }else if(randomArea <= 0.65){
+            role.area = '农村'
+        }else{
+            role.area = '城市'
+        }
+        this.setState({role})
     }
     getRandomEntry = ()=>{
         const {entryLibrary} = this.state
@@ -36,17 +69,20 @@ export default class Life extends Component {
     }
     nextStory = ()=>{
         const {lifeStorys,role} = this.state
-        lifeStorys.push({text:`${role.age}岁:`+ this.getRandomEntry()});
+        if(role.age === 0){
+            this.randomRole();
+            lifeStorys.push({text:`你顺利出生了，是个${role.sex}娃，你被取名【${role.name}】`,class:'green'});
+        }else if(role.age === 1){
+            lifeStorys.push({text:`${role.age}岁:`+`你从小生活在${role.area}`});
+        }else{
+            lifeStorys.push({text:`${role.age}岁:`+ this.getRandomEntry()});
+        }
         role.age++
-        // console.log(lifeStoryList.current.scrollHeight);
-        // console.log(lifeStoryList.current.scrollTop);
-        // setTimeout(()=>{
-        //     lifeStoryList.current.scrollTop = lifeStoryList.current.scrollHeight;
-        // },500)
         this.setState({role})
         this.setState({lifeStorys})
     }
     componentDidUpdate(){
+        // 滚动条至底部
         const {lifeStoryList} = this
         lifeStoryList.current.scrollTop = lifeStoryList.current.scrollHeight;
     }
