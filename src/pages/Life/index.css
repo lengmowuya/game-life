@@ -6,15 +6,13 @@
 }
 #LifePage .AttributeHeader {
   width: calc(100% - 20px);
-  padding: 15px;
   margin: 10px;
   box-sizing: border-box;
-  background-color: #F0F0F0;
   display: flex;
   justify-content: space-between;
 }
 #LifePage .AttributeHeader .attributeLi {
-  border: 2px solid #fff;
+  border: 2px solid #000;
   text-align: center;
   font-weight: bold;
 }
@@ -23,7 +21,8 @@
   color: #000;
   padding: 3px 12px;
   padding-bottom: 5px;
-  font-size: 14px;
+  border-bottom: 2px solid #000;
+  font-size: 16px;
   user-select: none;
 }
 #LifePage .AttributeHeader .attributeLi .attributeLiCount {
@@ -38,18 +37,17 @@
 #LifePage .AttributeHeader .attributeLi.green .attributeLiName {
   color: #fff;
   background: #84C537;
+  border-color: #84C537;
 }
 #LifePage .LifeStoryList {
   width: calc(100% - 20px);
-  background-color: #F0F0F0;
   margin: 10px;
   margin-top: 0px;
-  padding: 15px;
   box-sizing: border-box;
   overflow: auto;
 }
 #LifePage .LifeStoryList .lifeStoryLi {
-  border: 1px solid #fff;
+  border: 1px solid #DDDDDD;
   background: #fff;
   line-height: 30px;
   min-height: 50px;
@@ -64,5 +62,6 @@
 #LifePage .LifeStoryList .lifeStoryLi.green {
   background: #84C537;
   color: #fff;
+  font-weight: bold;
   border-color: #84C537;
 }
