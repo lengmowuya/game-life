@@ -15,6 +15,8 @@
   border: 2px solid #000;
   text-align: center;
   font-weight: bold;
+  border-radius: 6px;
+  overflow: hidden;
 }
 #LifePage .AttributeHeader .attributeLi .attributeLiName {
   background: #fff;
@@ -39,6 +41,26 @@
   background: #84C537;
   border-color: #84C537;
 }
+#LifePage .AttributeHeader .attributeLi.blue {
+  background: #0069BE;
+  color: #0069BE;
+  border-color: #0069BE;
+}
+#LifePage .AttributeHeader .attributeLi.blue .attributeLiName {
+  color: #fff;
+  background: #0069BE;
+  border-color: #0069BE;
+}
+#LifePage .AttributeHeader .attributeLi.danger {
+  background: red;
+  color: red;
+  border-color: red;
+}
+#LifePage .AttributeHeader .attributeLi.danger .attributeLiName {
+  color: #fff;
+  background: red;
+  border-color: red;
+}
 #LifePage .LifeStoryList {
   width: calc(100% - 20px);
   margin: 10px;
@@ -54,6 +76,7 @@
   margin-bottom: 10px;
   display: flex;
   align-items: center;
+  border-radius: 4px;
 }
 #LifePage .LifeStoryList .lifeStoryLi .storyText {
   margin-left: 10px;
@@ -64,4 +87,10 @@
   color: #fff;
   font-weight: bold;
   border-color: #84C537;
+}
+#LifePage .LifeStoryList .lifeStoryLi.red {
+  background: red;
+  color: #fff;
+  font-weight: bold;
+  border-color: red;
 }

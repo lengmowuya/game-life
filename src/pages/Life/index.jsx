@@ -13,39 +13,59 @@ export default class Life extends Component {
             sex:'男',
             area:'农村',
             name:'张建安',
-            areaLibrary:null
+            areaLibrary:null,
+            dead:false
         },
         famaily:[
             {identity:"父亲",industry:"赤脚医生"},
             {identity:"母亲",industry:"农妇"}
         ],
-        attributes:[
-            {name:'精神',count:6,level:2},
-            {name:'颜值',count:2,level:1},
-            {name:'体质',count:1,level:1},
-            {name:'魅力',count:1,level:1},
-            {name:'家境',count:3,level:1},
-            {name:'金钱',count:0,level:1}
-        ],
-        levelColors:['black','green','blue','purple','red'],
+        attributes:{
+            '精神':{count:6,level:2},
+            '颜值':{count:2,level:1},
+            '体质':{count:1,level:1},
+            '魅力':{count:1,level:1},
+            '快乐':{count:1,level:1},
+            '家境':{count:3,level:1},
+            '金钱':{count:0,level:1}
+        },
+        levelColors:['danger','black','green','blue','purple','red'],
         lifeStorys:[
         ],
         entryLibrary:[
-            // '你总是遭遇校园霸凌',
             '你换了好几颗牙',
             '你生了场重病，家里花了不少钱',
-            // '到同学家借书看',
             '偷橘子差点被主人家发现',
-            // '你追得家里的动物鸡飞狗跳',
-            // '你偷了父母的零钱去买零食',
-            // '今年股市大崩，股民损失惨重',
             '顺利的一年，没发生什么大事',
-            // '你的身体越来越差了',
             '你对人生有些迷茫，还有些懵懂',
             '你得了感冒',
             '你发觉生活有些时候很无趣'
         ],
         entryList:[]
+    }
+    updateAttributes = ()=>{
+        const {attributes} = this.state
+        Object.keys(attributes).map(attr=>{
+            const attribute = attributes[attr]
+            if(attribute.count <= -1){
+                attribute.level = 0;
+            }else if(attribute.count <= 4){
+                attribute.level = 1;
+            }else if(attribute.count <= 9){
+                attribute.level = 2;
+            }else if(attribute.count <= 19){
+                attribute.level = 3;
+            }
+        })
+    }
+    roleSurvive = ()=>{
+        const {lifeStorys,role,attributes} = this.state
+        if(attributes['体质'].count <= -3){
+            lifeStorys.push({text:`因为身体过于虚弱,【${role.name}】死了`,class:'red'});
+            role.dead = true;
+            this.setState({lifeStorys})
+            this.setState({role})
+        }
     }
     randomRole = ()=>{
         const {role} = this.state
@@ -67,7 +87,7 @@ export default class Life extends Component {
         this.setState({role})
     }
     getRandomAreaEntry =()=>{
-        const {role} = this.state
+        const {role,attributes} = this.state
         const {age,areaLibrary} = role;
         let targetLibrary;
         if(age<18){
@@ -78,7 +98,16 @@ export default class Life extends Component {
         // 如果目标词库为空
         if(targetLibrary.length<=0) return '今年无事发生'
         const randomNumber = Math.floor(Math.random()*targetLibrary.length);
-        return targetLibrary[randomNumber];
+        const award = targetLibrary[randomNumber].award;
+        if(award){
+            console.log(award)
+            // attributes[award]
+            for(let attr in award){
+                attributes[attr].count += award[attr];
+            }
+        }
+        this.setState({attributes})
+        return targetLibrary[randomNumber].text;
     }
     getRandomEntry = ()=>{
         const {entryLibrary} = this.state
@@ -93,6 +122,8 @@ export default class Life extends Component {
     }
     nextStory = ()=>{
         const {lifeStorys,role} = this.state
+        // 角色不能死亡
+        if(role.dead) return;
         if(role.age === 0){
             this.randomRole();
             lifeStorys.push({text:`你顺利出生了，是个${role.sex}娃，你被取名【${role.name}】`,class:'green'});
@@ -102,6 +133,8 @@ export default class Life extends Component {
             lifeStorys.push({text:`${role.age}岁:`+ this.getRandomEntry()});
         }
         role.age++
+        this.updateAttributes();
+        this.roleSurvive();
         this.setState({role})
         this.setState({lifeStorys})
     }
@@ -116,11 +149,12 @@ export default class Life extends Component {
             <div id="LifePage" onClick={this.nextStory}>
                 <div className="AttributeHeader">
                     {
-                        attributes.map(attribute=>{
-                            const levelColor = levelColors[attribute.level-1];
+                        Object.keys(attributes).map(attr=>{
+                            const attribute = attributes[attr]
+                            const levelColor = levelColors[attribute.level];
                             return (
-                                <div className={classNames('attributeLi',levelColor)} key={attribute.name}>
-                                    <p className="attributeLiName">{attribute.name}</p>
+                                <div className={classNames('attributeLi',levelColor)} key={attr}>
+                                    <p className="attributeLiName">{attr}</p>
                                     <p className="attributeLiCount">{attribute.count}</p>
                                 </div>
                             )
